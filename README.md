@@ -40,7 +40,7 @@
       就会生成一个与txt文件同名的excel文件，打开该文件，提示错误是否修复，选择‘是’。
       就可以看到结果文件中存在两张工作表，‘整理好的数据’是已经规范好的数据，‘无法识别数据‘
       是程序无法识别的数据，如果这些数据仍有效需要整理，请团长们自己手动整理一下。
-   2. 如果你不太熟悉代码，则请到release里下载我打包好的[exe版本][https://gitee.com/NaCl_cn/gpurchase/attach_files/1027002/download/Gpurchase.exe]，并将其放在一个单独
+   2. 如果你不太熟悉代码，则请到release里下载我打包好的[exe版本](https://gitee.com/NaCl_cn/gpurchase/attach_files/1027002/download/Gpurchase.exe)，并将其放在一个单独
       的文件夹内，并将你需要整理的文本文件也放在这个文件夹下，双击Gpurchase.exe文件
       完成后就可以看到与txt文件同名的excel结果文件了。打开该文件，提示错误是否修复，选择‘是’。
       就可以看到结果文件中存在两张工作表，‘整理好的数据’是已经规范好的数据，‘无法识别数据‘
