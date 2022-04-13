@@ -30,7 +30,7 @@ def read_file(file_name: str):
 
 def format_data(data: str):
     pattern1 = '(\d{1,})\..*'
-    pattern2 = '\d{1,}\.(\s*[^甲乙丙丁1-9]*\s*纺*平*[^甲乙丙丁1-9]*\s*)([甲乙丙丁]{0,1}\d{1,4}号{0,1}[甲乙丙丁]{0,1})-{0,1}\s*(\d{3,4})室{0,1}\D*\s*([0-9一二三四五六七八九十Il\|]{1,})[份套斤瓶个]{0,1}.*'
+    pattern2 = '\d{1,}\.(\s*\D*\s*)([甲乙丙丁]{0,1}\d{1,4}号{0,1}[甲乙丙丁]{0,1})-{0,1}\s*(\d{3,4})室{0,1}\D*\s*([0-9一二三四五六七八九十Il\|]{1,})[份套斤瓶个]{0,1}.*'
     convert_dict = {
         '一': '1',
         'I': '1',
@@ -58,8 +58,6 @@ def format_data(data: str):
             continue
 
         part_num = item_analyze.group(2)
-        if '纺平' in item_analyze.group(1) or not re.search(pattern='\d{4}', string=item_analyze.group(3)) is None:
-            part_num = '纺平大厦' + item_analyze.group(2)
 
         if re.search(pattern='[甲乙丙丁]', string=part_num):
             part_num = re.search(pattern='\d{1,}', string=part_num).group() + '号' + re.search(pattern='[甲乙丙丁]', string=part_num).group()
@@ -87,17 +85,15 @@ def format_data(data: str):
 
 def main() -> None:
     file_list = get_file_list()
+
     for file in file_list:
         content = read_file(file_name=file)
         data_ok, data_bad = format_data(data=content)
         file_name = './' + file.split("/")[-1].split("\\")[-1][:-4] + '.xlsx'
-
-        data_writer = pd.ExcelWriter(file_name)
+        data_writer = pd.ExcelWriter(path=file_name, engine='xlsxwriter')
         data_ok.to_excel(data_writer, sheet_name='整理好的数据')
         data_bad.to_excel(data_writer, sheet_name='无法识别数据')
-
         data_writer.save()
-        data_writer.close()
 
     return
 
